@@ -1,9 +1,10 @@
-import random
-from binarySearch import *
+import time
+from binarySearch import binarySearch
+from dictionary import getDict, getWord
 #web scrapper dictionary functionality (developing...)
 
-dictionary = ["about", "above", "abuse", "actor", "alike", "array", "board", "clean", "buyer", "daily", "crown", "dance", "death", "dealt", "found", "fraud", "globe", "glass", "given", "power", "press", "prove", "quiet", "quick", "queen", "stock", "steel", "stuff", "wrote", "women", "worse", "white"]
-word = random.choice(dictionary)
+dictionary = getDict()
+word = getWord(dictionary)
 win = False
 tries = 0
 
@@ -12,12 +13,24 @@ while (win != True and tries < 5):
         guess = input("Type a word \n")
         if len(guess) != 5:
             raise ValueError
+
+        #search in the dictionary to validate is a word
+        validWord = binarySearch (dictionary, 0, len(dictionary)-1, guess)
+        if validWord != -1:
+            print("The word has been found in the dictionary")
+        else:
+            print("The word is valid but not found in the dictionary")
+            tries = tries - 1
+        tries = tries + 1
+
     except ValueError:
         print("The word is not valid...")
+        tries = tries - 1
 
     if guess == word:
         win = True
-    tries = tries + 1
+    time.sleep(3)
+
 
 if win != True:
     print("You loose")

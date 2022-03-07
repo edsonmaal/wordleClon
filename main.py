@@ -1,17 +1,18 @@
 import time
 from binarySearch import binarySearch
 from dictionary import getDict, getWord
+from letterChecker import correctLetters
 #web scrapper dictionary functionality (developing...)
 
-dictionary = getDict()
-word = getWord(dictionary)
-win = False
-tries = 0
+dictionary = getDict() #import the dictionary of words (webscrapper or smthng)
+word = getWord(dictionary) #select a random word from the dictionary to be guessed
+win = False #flag who indicates if the user has won or not yet
+tries = 0 #adder of the tries of the user
 
-while (win != True and tries < 5):
+while (win != True and tries < 5): #while the user hasn't won and has less than 5 tries...
     try:
         guess = input("Type a word \n")
-        if len(guess) != 5:
+        if len(guess) != 5: #for this game, the dictionary will only contain 5 letter word
             raise ValueError
 
         #search in the dictionary to validate is a word
@@ -26,6 +27,8 @@ while (win != True and tries < 5):
     except ValueError:
         print("The word is not valid...")
         tries = tries - 1
+
+    correctLetters(guess, word)
 
     if guess == word:
         win = True

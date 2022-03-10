@@ -6,16 +6,13 @@ def correctLetters(guess, word):
 
     correctNumnber = 0
 
-    print(guessL)
-    print(wordL)
-
     for x in guessL:
         for y in wordL:
             if x == y:
                 print("Letter has been found: ", x)
                 if guessL.index(x) == wordL.index(y):
-                    print("The found letter is in the correct position")
+                    print("The found letter is in the correct position\n ")
                 else:
-                    print("The found letter is in other position")
+                    print("The found letter is in other position \n")
                 break 
     
